@@ -19,7 +19,7 @@
     </div>
 
     <div id="main-content">
-        <button>Add new book</button>
+        <button id="new-book-button">Add new book</button>
         <div id="grid">
             <div class="grid-item"></div>
             <div class="grid-item"></div>
@@ -32,5 +32,26 @@
         <p>Created by albertngdev</p>
         <img src="" alt="">
     </div>
+
+    <dialog id="new-book-dialog">
+        <form id="book-dialog" method="dialog">
+            <h2>New book</h2>
+            <div id="inputs-div">
+                <input type="text" name="title" placeholder="Title" id="title" required>
+                <input type="text" name="author" placeholder="Author" id="author" required>
+                <input type="text" name="pages" placeholder="Number of pages" id="pages" required>
+                <div>
+                    <label for="read">Have you read it?</label>
+                    <input type="checkbox" name="read" id="read">
+                </div>
+                <div id="Create-close-div">
+                    <button type="button" id="submit-book">Create</button>
+                    <button type="button" id="close-book">Close</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
 </body>
+<script src="./script.js" defer></script>
 </html>

@@ -76,3 +76,41 @@ body {
     height: 25px;
     width: 25px;
 }
+
+/* Dialog Form Styling */
+
+#book-dialog {
+    height: 350px;
+    width: 250px;
+    padding: 0 50px;
+    position: relative;
+}
+
+#book-dialog > h2 {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#inputs-div {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+#inputs-div > input {
+    height: 25px;
+    font-size: 16px;
+}
+
+#Create-close-div {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+#Create-close-div > button {
+    flex-grow: 1;
+    height: 35px;
+}
+
