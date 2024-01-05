@@ -3,9 +3,10 @@
 const addNewBookButton = document.getElementById("new-book-button");
 const bookDialog = document.getElementById("new-book-dialog");
 const closeBook = document.getElementById("close-book");
+const bookForm = document.getElementById("book-form");
 
 addNewBookButton.addEventListener("click", () => {
-    console.log("modal opened");
+    bookForm.reset();
     bookDialog.showModal();
 });
 
@@ -56,16 +57,50 @@ submitBookButton.addEventListener("click", () => {
         // add an id attribute equal to counter+1 (id is the index of the book within myLibrary Array), 
         // add the class "grid-item" to style the div through css, 
         // append the div, 
-        // increment counter (keeping track of the exact number of books)
         const bookDiv = document.createElement("div");
         bookDiv.setAttribute("id", `${counter + 1}`)
         bookDiv.classList.add("grid-item");
         grid.appendChild(bookDiv);
+
+        // Create constants for the 3 divs and the button that will go inside "bookDiv".
+        const titleDiv = document.createElement("div");
+        const authorDiv = document.createElement("div");
+        const pagesDiv = document.createElement("div");
+        const readButton = document.createElement("button");
+        const deleteImgDiv = document.createElement("div");
+
+        // Give each div within book div its text content, corresponding with the object different property values.
+        titleDiv.textContent = `${myLibrary[counter + 1].title}`;
+        authorDiv.textContent = `${myLibrary[counter + 1].author}`;
+        pagesDiv.textContent = `${myLibrary[counter + 1].pages}`;
+        readButton.textContent = `${(myLibrary[counter + 1].read) === true ? "Read" : "Not read"}`;
+
+        // Add id to the divs/button
+        titleDiv.setAttribute("id", "titleDiv");
+        authorDiv.setAttribute("id", "authorDiv");
+        pagesDiv.setAttribute("id", "pagesDiv");
+        readButton.setAttribute("id", "readButton");
+        deleteImgDiv.setAttribute("id", "deleteImgDiv")
+
+        // Append divs/button as bookDiv childs
+        bookDiv.appendChild(titleDiv);
+        bookDiv.appendChild(authorDiv);
+        bookDiv.appendChild(pagesDiv);
+        bookDiv.appendChild(readButton);
+        bookDiv.appendChild(deleteImgDiv);
+
+        // Create, add id and append bin img inside "deleteImgDiv"
+        const deleteBookImg = document.createElement("img");
+        deleteBookImg.setAttribute("src", "");
+        deleteBookImg.setAttribute("alt", "an image from a bin");
+        deleteImgDiv.appendChild(deleteBookImg);
+
+        // increment counter (keeping track of the exact number of books)
         counter++;
     }
    
 });
 
-
+// submitBookButton solo deberá utilizarse cuando todos los campos del form han sido rellenados correctamente
 // Añadir los sub-elementos y el styling para los .grid-item 
 // cuando la array se queda con 0 objetos, habrá que hacer un counter-- para volverlo a dejar en -1. No puede quedar en 0.
