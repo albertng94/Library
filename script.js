@@ -71,16 +71,23 @@ submitBookButton.addEventListener("click", () => {
 
         // Give each div within book div its text content, corresponding with the object different property values.
         titleDiv.textContent = `${myLibrary[counter + 1].title}`;
-        authorDiv.textContent = `${myLibrary[counter + 1].author}`;
-        pagesDiv.textContent = `${myLibrary[counter + 1].pages}`;
-        readButton.textContent = `${(myLibrary[counter + 1].read) === true ? "Read" : "Not read"}`;
+        authorDiv.textContent = `By ${myLibrary[counter + 1].author}`;
+        pagesDiv.textContent = `${myLibrary[counter + 1].pages} pages`;
+        readButton.textContent = `${(myLibrary[counter + 1].read) === true ? "Read" : "In progress ..."}`;
 
         // Add id to the divs/button
         titleDiv.setAttribute("id", "titleDiv");
         authorDiv.setAttribute("id", "authorDiv");
         pagesDiv.setAttribute("id", "pagesDiv");
         readButton.setAttribute("id", "readButton");
-        deleteImgDiv.setAttribute("id", "deleteImgDiv")
+        deleteImgDiv.setAttribute("id", "deleteImgDiv");
+
+        // Add a different background color to the readButton depending on its value
+        if (myLibrary[counter + 1].read === true) {
+            readButton.style.backgroundColor = "rgb(133, 211, 166)";            
+        } else {
+            readButton.style.backgroundColor = "rgb(163, 163, 163)";
+        }
 
         // Append divs/button as bookDiv childs
         bookDiv.appendChild(titleDiv);
@@ -90,10 +97,9 @@ submitBookButton.addEventListener("click", () => {
         bookDiv.appendChild(deleteImgDiv);
 
         // Create, add id and append bin img inside "deleteImgDiv"
-        const deleteBookImg = document.createElement("img");
-        deleteBookImg.setAttribute("src", "");
-        deleteBookImg.setAttribute("alt", "an image from a bin");
-        deleteImgDiv.appendChild(deleteBookImg);
+        const deleteBookIcon = document.createElement("ion-icon");
+        deleteBookIcon.setAttribute("name", "trash-outline");
+        deleteImgDiv.appendChild(deleteBookIcon);
 
         // increment counter (keeping track of the exact number of books)
         counter++;

@@ -49,16 +49,8 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, 350px);
-    /*grid-auto-flow: column dense;*/
     gap: 40px;
     justify-content: center;
-}
-
-.grid-item {
-    background-color: white;
-    border-radius: 5%;
-    width: 100%;
-    height: 250px;
 }
 
 #footer {
@@ -113,5 +105,68 @@ body {
 #Create-close-div > button {
     flex-grow: 1;
     height: 35px;
+}
+
+/* Book Cards Styling */
+
+.grid-item {
+    position: relative;
+    background-color: white;
+    border-radius: 5%;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 25px;
+    gap: 5px;
+}
+
+#titleDiv {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#authorDiv {
+    top: 65px;
+    font-size: 17px;
+    font-style: italic;
+    border-bottom: 1px solid grey;
+    padding-bottom: 5px;
+}
+
+#pagesDiv {
+    font-size: 14px;
+}
+
+#readButton {
+    position: absolute;
+    top: 160px;
+    left: calc(50% - 60px);
+    width: 120px;
+    height: 40px;
+    border-radius: 6px;
+    /*background-color: rgb(163, 163, 163);*/
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#deleteImgDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 215px;
+    left: 90%;
+    width: 26px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+ion-icon {
+    font-size: 24px;
+    color:  rgb(180, 13, 13);
+    --ionicon-stroke-width: 35px;
 }
 
