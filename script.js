@@ -1,112 +1,208 @@
-// Open and close new book dialog box
+// ................................ MAIN FUNCTIONS ...............................................
 
-const addNewBookButton = document.getElementById("new-book-button");
-const bookDialog = document.getElementById("new-book-dialog");
-const closeBook = document.getElementById("close-book");
-const bookForm = document.getElementById("book-form");
+// Open new book dialog box on button click
 
-addNewBookButton.addEventListener("click", () => {
-    bookForm.reset();
-    bookDialog.showModal();
-});
+const openNewBookDialog = (function() {
 
-closeBook.addEventListener("click", () => {
-    bookDialog.close();
-});
+    const addNewBookButton = document.getElementById("new-book-button");
+    const bookDialog = document.getElementById("new-book-dialog");
+    const bookForm = document.getElementById("book-form");
+
+    addNewBookButton.addEventListener("click", () => {
+        bookForm.reset();
+        bookDialog.showModal();
+    });
+
+})();
 
 
-// Book Object Constructor - stores the basic information to be added from each book.
+// Close new book dialog box on button click
 
-function book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+const closeNewBookDialog = (function() {
+
+    const bookDialog = document.getElementById("new-book-dialog");
+    const closeBook = document.getElementById("close-book");
+
+    closeBook.addEventListener("click", () => {
+        bookDialog.close();
+    });
+
+})();
+
+
+// Add new book to library and display book cards each time the necessary button is clicked
+
+const executeNewBookCreation = (function() {
+
+    const submitBookButton = document.getElementById("submit-book");
+
+    submitBookButton.addEventListener("click", () => {
+        // "createNewBookCard" executes "pushNewBookArray" (pushes the current book into "myLibrary" array) and creates the book card in the DOM.
+        createNewBookCard();
+        console.log(myLibrary);
+        booksCount++;
+        console.log(booksCount);
+    });
+
+})();
+
+
+// Delete book selected by user from myLibrary array and the display. Decrease "booksCount" variable by one to keep track of the current number of books.
+
+function executeBookDeletion(e) {
+    const deleteBookDialog = document.getElementById("delete-book-dialog");
+    const confirmDeleteBook = document.getElementById("delete-book-yes");
+    const rejectDeleteBook = document.getElementById("delete-book-no");
+    const gridItemId = e.target.parentNode.parentNode.id;
+    const gridItem = e.target.parentNode.parentNode;
+
+            deleteBookDialog.showModal();
+
+            confirmDeleteBook.addEventListener("click", () => {
+                    deleteBookDialog.close();
+                    deleteBookFromArray(gridItemId);
+                    deleteBookCard(gridItem);
+                    booksCount--;
+                }, { once: true });
+
+            rejectDeleteBook.addEventListener("click", () => {
+                deleteBookDialog.close();
+            });
 }
 
-// Array myLibrary stores all book objects
 
-const myLibrary = [];
-
-
-// Variables used by the submitBookButton() function.
-
-const submitBookButton = document.getElementById("submit-book");
-const bookTitle = document.getElementById("title");
-const bookAuthor = document.getElementById("author");
-const bookPages = document.getElementById("pages");
-const bookRead = document.getElementById("read");
-const grid = document.getElementById("grid");
+// .................................................................................................................
 
 
-// Counter variable is used by submitBookButton keep track of the books number ((created - deleted)-1)
-
-let counter = -1;
 
 
-// Add new book to library when the necessary button is clicked
-submitBookButton.addEventListener("click", () => {
-    // Push new book into myLibrary Array
-    myLibrary.push(new book(bookTitle.value, bookAuthor.value, bookPages.value, bookRead.checked));
-    // Close dialog
+
+
+
+// ................................ GLOBAL VARIABLES ...............................................................
+
+// Array myLibrary stores all book objects (A new book is added when "executeNewBookCreation" and the book selected by user is deleted when "executeBookDeletion()"" is executed instead). 
+// Variable booksCount keeps track of the current number of books (is incremented when "executeNewBookCreation" is executed and decremented when "executeBookDeletion()"" is executed).
+
+let myLibrary = [];
+let booksCount = 0;
+
+// .................................................................................................................
+
+
+
+
+
+
+// ............................. FUNCTIONS USED BY MAIN FUNCTION ...................................................
+
+
+// Book Object Constructor - stores the basic information to be added from each book (Used by function "pushBookToArray").
+
+function book(title, bookAuthor, bookPages, bookRead) {
+    const author = `By ${bookAuthor}`;
+    const pages = `${bookPages} pages`;
+    const read = bookRead === true ? "Read" : "In progress...";
+
+    return {title, author, pages, read};
+}
+
+
+// Push a new book object to myLibrary Array and close the dialog (used by function "createNewBookCard()").
+
+function pushBookToArray() {
+
+    const bookDialog = document.getElementById("new-book-dialog");
+    const bookTitle = document.getElementById("title");
+    const bookAuthor = document.getElementById("author");
+    const bookPages = document.getElementById("pages");
+    const bookRead = document.getElementById("read");
+    
+    const newBook = book(bookTitle.value, bookAuthor.value, bookPages.value, bookRead.checked);   
+    myLibrary.push(newBook);
     bookDialog.close();
 
-    // Loop through myLibrary Array
-    for (let i = counter; i < myLibrary.length-1; i++) {
-        // Create a div, 
-        // add an id attribute equal to counter+1 (id is the index of the book within myLibrary Array), 
-        // add the class "grid-item" to style the div through css, 
-        // append the div, 
-        const bookDiv = document.createElement("div");
-        bookDiv.setAttribute("id", `${counter + 1}`)
-        bookDiv.classList.add("grid-item");
-        grid.appendChild(bookDiv);
+    return newBook ;
+}
 
-        // Create constants for the 3 divs and the button that will go inside "bookDiv".
-        const titleDiv = document.createElement("div");
-        const authorDiv = document.createElement("div");
-        const pagesDiv = document.createElement("div");
-        const readButton = document.createElement("button");
-        const deleteImgDiv = document.createElement("div");
 
-        // Give each div within book div its text content, corresponding with the object different property values.
-        titleDiv.textContent = `${myLibrary[counter + 1].title}`;
-        authorDiv.textContent = `By ${myLibrary[counter + 1].author}`;
-        pagesDiv.textContent = `${myLibrary[counter + 1].pages} pages`;
-        readButton.textContent = `${(myLibrary[counter + 1].read) === true ? "Read" : "In progress ..."}`;
+// Create as many book cards as book objects has myLibrary Array and add all the necessary elements to them (used by const "executeNewBookCreation").
 
-        // Add id to the divs/button
-        titleDiv.setAttribute("id", "titleDiv");
-        authorDiv.setAttribute("id", "authorDiv");
-        pagesDiv.setAttribute("id", "pagesDiv");
-        readButton.setAttribute("id", "readButton");
-        deleteImgDiv.setAttribute("id", "deleteImgDiv");
+function createNewBookCard() {
 
-        // Add a different background color to the readButton depending on its value
-        if (myLibrary[counter + 1].read === true) {
-            readButton.style.backgroundColor = "rgb(133, 211, 166)";            
-        } else {
-            readButton.style.backgroundColor = "rgb(163, 163, 163)";
-        }
+    // Execute function "pushNewBookArray" and save "newBook" (current book object) into variable "bookCard", so its values can be used to add them to the div (to the Book Card)
+    const bookCard = pushBookToArray();
 
-        // Append divs/button as bookDiv childs
-        bookDiv.appendChild(titleDiv);
-        bookDiv.appendChild(authorDiv);
-        bookDiv.appendChild(pagesDiv);
-        bookDiv.appendChild(readButton);
-        bookDiv.appendChild(deleteImgDiv);
+    // Create a div, 
+    // add an id attribute equal to counter+1 (id is the index of the book within myLibrary Array), 
+    // add the class "grid-item" to style the div through css, 
+    // append the div, 
+    const bookDiv = document.createElement("div");
+    bookDiv.setAttribute("id", `${booksCount}`)
+    bookDiv.classList.add("grid-item");
+    grid.appendChild(bookDiv);
 
-        // Create, add id and append bin img inside "deleteImgDiv"
-        const deleteBookIcon = document.createElement("ion-icon");
-        deleteBookIcon.setAttribute("name", "trash-outline");
-        deleteImgDiv.appendChild(deleteBookIcon);
+    // Create constants for the 3 divs and the button that will go inside "bookDiv".
+    const titleDiv = document.createElement("div");
+    const authorDiv = document.createElement("div");
+    const pagesDiv = document.createElement("div");
+    const readButton = document.createElement("button");
+    const deleteIconDiv = document.createElement("div");
 
-        // increment counter (keeping track of the exact number of books)
-        counter++;
+    // Give each div within book div its text content, corresponding with the object different property values.
+    titleDiv.textContent = `${bookCard.title}`;
+    authorDiv.textContent = `${bookCard.author}`;
+    pagesDiv.textContent = `${bookCard.pages}`;
+    readButton.textContent = `${bookCard.read}`;
+
+    // Add id/class to the divs/button
+    titleDiv.setAttribute("id", "titleDiv");
+    authorDiv.setAttribute("id", "authorDiv");
+    pagesDiv.setAttribute("id", "pagesDiv");
+    readButton.setAttribute("id", "readButton");
+    deleteIconDiv.setAttribute("onclick", "executeBookDeletion(event)");
+    deleteIconDiv.classList.add("deleteIconDiv");
+
+    // Add a different background color to the readButton depending on its value
+    if (bookCard.read === "Read") {
+        readButton.style.backgroundColor = "rgb(133, 211, 166)";            
+    } else {
+        readButton.style.backgroundColor = "rgb(163, 163, 163)";
     }
-   
-});
 
-// submitBookButton solo deberá utilizarse cuando todos los campos del form han sido rellenados correctamente
-// Añadir los sub-elementos y el styling para los .grid-item 
-// cuando la array se queda con 0 objetos, habrá que hacer un counter-- para volverlo a dejar en -1. No puede quedar en 0.
+    // Append divs/button as bookDiv childs
+    bookDiv.appendChild(titleDiv);
+    bookDiv.appendChild(authorDiv);
+    bookDiv.appendChild(pagesDiv);
+    bookDiv.appendChild(readButton);
+    bookDiv.appendChild(deleteIconDiv);
+
+    // Create, add id and append bin img inside "deleteImgDiv"
+    const deleteBookIcon = document.createElement("ion-icon");
+    deleteBookIcon.setAttribute("name", "trash-outline");
+    deleteIconDiv.appendChild(deleteBookIcon); 
+
+}
+
+
+// Delete user-selected book from array and re-write the book-card-main-div's id to match the new position number within the array (used by function "executeBookDeletion()").
+
+function deleteBookFromArray(element) {
+
+    myLibrary.splice(element, 1);
+
+    for (let i = element; i <= myLibrary.length; i++) {
+        const bookCard = document.getElementById(`${i}`);
+
+        bookCard.id = `${i-1}`;
+    }
+
+
+}
+
+
+// Delete the user-selected book card from the display (Used by function "executeBookDeletion()").
+
+function deleteBookCard(element) {
+        element.remove(); 
+}
