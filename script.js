@@ -71,6 +71,28 @@ function executeBookDeletion(e) {
 }
 
 
+// Change read status of bookObject/Card on button click
+
+function changeReadStatus(e) {
+
+    const bookCardId = e.target.parentNode.id;
+    const readButton = e.target;
+
+    if (readButton.textContent === "Read") {
+        readButton.textContent = "In progress...";
+        readButton.style.backgroundColor = "rgb(163, 163, 163)";
+        myLibrary[bookCardId].read = "In progress...";
+
+    } else {
+        readButton.textContent = "Read";
+        readButton.style.backgroundColor = "rgb(133, 211, 166)";
+        myLibrary[bookCardId].read = "Read";
+    }
+
+    console.log(myLibrary);
+}
+
+
 // .................................................................................................................
 
 
@@ -160,6 +182,7 @@ function createNewBookCard() {
     authorDiv.setAttribute("id", "authorDiv");
     pagesDiv.setAttribute("id", "pagesDiv");
     readButton.setAttribute("id", "readButton");
+    readButton.setAttribute("onclick", "changeReadStatus(event)")
     deleteIconDiv.setAttribute("onclick", "executeBookDeletion(event)");
     deleteIconDiv.classList.add("deleteIconDiv");
 
