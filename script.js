@@ -30,7 +30,7 @@ const closeNewBookDialog = (function() {
 })();
 
 
-// Add new book to library and display book cards each time the necessary button is clicked
+// Add new book to library and display book cards each time the necessary button is clicked. Increment bookCount. Update stats information.
 
 const executeNewBookCreation = (function() {
 
@@ -39,15 +39,14 @@ const executeNewBookCreation = (function() {
     submitBookButton.addEventListener("click", () => {
         // "createNewBookCard" executes "pushNewBookArray" (pushes the current book into "myLibrary" array) and creates the book card in the DOM.
         createNewBookCard();
-        console.log(myLibrary);
         booksCount++;
-        console.log(booksCount);
+        updateStats();
     });
 
 })();
 
 
-// Delete book selected by user from myLibrary array and the display. Decrease "booksCount" variable by one to keep track of the current number of books.
+// Delete book selected by user from myLibrary array and the display. Decrease "booksCount" variable by one to keep track of the current number of books. Update stats information.
 
 function executeBookDeletion(e) {
     const deleteBookDialog = document.getElementById("delete-book-dialog");
@@ -63,6 +62,7 @@ function executeBookDeletion(e) {
                     deleteBookFromArray(gridItemId);
                     deleteBookCard(gridItem);
                     booksCount--;
+                    updateStats();
                 }, { once: true });
 
             rejectDeleteBook.addEventListener("click", () => {
@@ -71,7 +71,7 @@ function executeBookDeletion(e) {
 }
 
 
-// Change read status of bookObject/Card on button click
+// Change read status of bookObject/Card on button click. Upate stats accordingly.
 
 function changeReadStatus(e) {
 
@@ -89,9 +89,35 @@ function changeReadStatus(e) {
         myLibrary[bookCardId].read = "Read";
     }
 
-    console.log(myLibrary);
+    updateStats();
 }
 
+
+// Open stats dialog box
+
+const openStatsDialog = (function() {
+
+    const statsButton = document.getElementById("stats");
+    const statsDialog = document.getElementById("stats-dialog");
+
+    statsButton.addEventListener("click", () => {
+        statsDialog.showModal();
+    })
+
+
+})();
+
+// Close stats dialog box
+
+const closeStatsDialog = (function() {
+
+    const closeStats = document.getElementById("close-stats");
+    const statsDialog = document.getElementById("stats-dialog");
+
+    closeStats.addEventListener("click", () => {
+        statsDialog.close();
+    })
+})();
 
 // .................................................................................................................
 
@@ -125,8 +151,9 @@ function book(title, bookAuthor, bookPages, bookRead) {
     const author = `By ${bookAuthor}`;
     const pages = `${bookPages} pages`;
     const read = bookRead === true ? "Read" : "In progress...";
+    const statsPages = Number(bookPages);
 
-    return {title, author, pages, read};
+    return {title, author, pages, read, statsPages};
 }
 
 
@@ -229,3 +256,46 @@ function deleteBookFromArray(element) {
 function deleteBookCard(element) {
         element.remove(); 
 }
+
+
+// Attach and update stats content to the stats dialog (Used by functions "executeNewBookCreation" and "executeBookDeletion").
+
+function updateStats() {
+
+
+    let totalBooksRead = 0;
+    let totalBooksInProgress = 0;
+    let totalPages = 0;
+
+
+    myLibrary.forEach(element => {
+        if (element.read === "Read") {
+            totalBooksRead++;
+        } else if (element.read === "In progress...") {
+            totalBooksInProgress++;
+        }
+        totalPages += element.statsPages;
+    });
+
+    const totalBooksDiv = document.getElementById("totalBooks");
+    const totalReadDiv = document.getElementById("totalRead");
+    const totalInProgressDiv = document.getElementById("totalInProgress");
+    const totalPagesDiv = document.getElementById("totalPages");
+    const noStatsDiv = document.getElementById("no-stat");
+
+    if ((totalBooksRead === 0) && (totalBooksInProgress === 0) && (totalPages === 0)) {
+        noStatsDiv.textContent = "Sorry! There are no listed books yet to show statistics..";
+        totalBooksDiv.textContent = ``;
+        totalReadDiv.textContent = ``;
+        totalInProgressDiv.textContent = ``;
+        totalPagesDiv.textContent = ``;
+    } else {
+        noStatsDiv.textContent = "";
+        totalBooksDiv.textContent = `Total books: ${booksCount}`;
+        totalReadDiv.textContent = `Books read: ${totalBooksRead}`;
+        totalInProgressDiv.textContent = `Books in progress: ${totalBooksInProgress}`;
+        totalPagesDiv.textContent = `Pages read: ${totalPages}`;
+    }
+
+}
+

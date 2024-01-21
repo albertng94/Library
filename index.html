@@ -13,7 +13,7 @@
     <div id="header">
         <h2>Library</h2>
         <div>
-            <button>Stats</button>
+            <button id="stats">Stats</button>
             <button>Log In</button>
         </div>
     </div>
@@ -54,6 +54,18 @@
             <button id="delete-book-no">No</button>
         </div>
     </dialog>
+
+    <dialog id="stats-dialog">
+        <div id="stats-div">
+            <div id="no-stat"></div>
+            <div class="stat" id="totalBooks"></div>
+            <div class="stat" id="totalRead"></div>
+            <div class="stat" id="totalInProgress"></div>
+            <div class="stat" id="totalPages"></div>
+            <button id="close-stats">Close</button>
+        </div>
+    </dialog>
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
