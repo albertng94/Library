@@ -40,7 +40,6 @@ const executeNewBookCreation = (function() {
         // "createNewBookCard" executes "pushNewBookArray" (pushes the current book into "myLibrary" array) and creates the book card in the DOM.
         createNewBookCard();
         booksCount++;
-        updateStats();
     });
 
 })();
@@ -62,7 +61,6 @@ function executeBookDeletion(e) {
                     deleteBookFromArray(gridItemId);
                     deleteBookCard(gridItem);
                     booksCount--;
-                    updateStats();
                 }, { once: true });
 
             rejectDeleteBook.addEventListener("click", () => {
@@ -89,7 +87,6 @@ function changeReadStatus(e) {
         myLibrary[bookCardId].read = "Read";
     }
 
-    updateStats();
 }
 
 
@@ -101,6 +98,7 @@ const openStatsDialog = (function() {
     const statsDialog = document.getElementById("stats-dialog");
 
     statsButton.addEventListener("click", () => {
+        updateStats();
         statsDialog.showModal();
     })
 
@@ -278,23 +276,39 @@ function updateStats() {
     });
 
     const totalBooksDiv = document.getElementById("totalBooks");
+    const totalBooksPresentation = document.getElementById("total-books");
     const totalReadDiv = document.getElementById("totalRead");
+    const totalReadPresentation = document.getElementById("books-read");
     const totalInProgressDiv = document.getElementById("totalInProgress");
+    const totalInProgressPresentation = document.getElementById("books-in-progress");
     const totalPagesDiv = document.getElementById("totalPages");
-    const noStatsDiv = document.getElementById("no-stat");
+    const totalPagesPresentation = document.getElementById("pages-read");
+    const noStatsDiv1 = document.getElementById("no-stat1");
+    const noStatsDiv2 = document.getElementById("no-stat2");
+
 
     if ((totalBooksRead === 0) && (totalBooksInProgress === 0) && (totalPages === 0)) {
-        noStatsDiv.textContent = "Sorry! There are no listed books yet to show statistics..";
+        noStatsDiv1.textContent = "Sorry!";
+        noStatsDiv2.textContent = "There are no books created yet...";
+        totalBooksPresentation.textContent = "";
         totalBooksDiv.textContent = ``;
+        totalReadPresentation.textContent = "";
         totalReadDiv.textContent = ``;
+        totalInProgressPresentation.textContent = "";
         totalInProgressDiv.textContent = ``;
+        totalPagesPresentation.textContent = "";
         totalPagesDiv.textContent = ``;
     } else {
-        noStatsDiv.textContent = "";
-        totalBooksDiv.textContent = `Total books: ${booksCount}`;
-        totalReadDiv.textContent = `Books read: ${totalBooksRead}`;
-        totalInProgressDiv.textContent = `Books in progress: ${totalBooksInProgress}`;
-        totalPagesDiv.textContent = `Pages read: ${totalPages}`;
+        noStatsDiv1.textContent = "";
+        noStatsDiv2.textContent = "";
+        totalBooksPresentation.textContent = "Total Books:";
+        totalBooksDiv.textContent = `${booksCount}`;
+        totalReadPresentation.textContent = "Books Read:";
+        totalReadDiv.textContent = `${totalBooksRead}`;
+        totalInProgressPresentation.textContent = "Books In Progress:";
+        totalInProgressDiv.textContent = `${totalBooksInProgress}`;
+        totalPagesPresentation.textContent = "Pages Read:";
+        totalPagesDiv.textContent = `${totalPages}`;
     }
 
 }

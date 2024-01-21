@@ -57,11 +57,27 @@
 
     <dialog id="stats-dialog">
         <div id="stats-div">
-            <div id="no-stat"></div>
-            <div class="stat" id="totalBooks"></div>
-            <div class="stat" id="totalRead"></div>
-            <div class="stat" id="totalInProgress"></div>
-            <div class="stat" id="totalPages"></div>
+            <div id="no-stat">
+                <div id="no-stat1"></div>
+                <div id="no-stat2"></div>
+            </div>
+            <div id="stats-header">Your Library Stats</div>
+            <div class="stat-div" id="stat-div-first">
+                <div class="stat-presentation" id="total-books"></div>
+                <div class="stat" id="totalBooks"></div>
+            </div>
+            <div class="stat-div">
+                <div class="stat-presentation" id="books-read"></div>
+                <div class="stat" id="totalRead"></div>
+            </div>
+            <div class="stat-div">
+                <div class="stat-presentation" id="books-in-progress"></div>
+                <div class="stat" id="totalInProgress"></div>
+            </div>
+            <div class="stat-div" id="stat-div-last">
+                <div class="stat-presentation" id="pages-read"></div>
+                <div class="stat" id="totalPages"></div>
+            </div>
             <button id="close-stats">Close</button>
         </div>
     </dialog>
