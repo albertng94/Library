@@ -1,51 +1,78 @@
 html {
     font-family: 'Roboto', sans-serif;
-    min-height: 100%;
+    height: 99%;
     position: relative;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    background-color: rgb(228, 225, 246);
+    display: grid;
+    grid-template-rows: 75px 1fr 50px;
+    height: 100%;
+    background-color: white;
 }
 
 #header {
-    outline: 3px red solid;
-    background-color: white;
+    background-color: transparent;
     height: 50px;
     padding: 25px;
     display: flex;
     align-items: center;
+    grid-row: 1 / 2;
 }
 
 #header > h2 {
-    outline: black 1px solid;
+    font-size: 40px;
     margin-right: auto;
 }
 
 #header > div {
-    outline: black 1px solid;
+    width: 300px;
     display: flex;
-    gap: 25px;
+    justify-content: end;
+    gap: 35px;
+}
+
+.header-button {
+    all: unset;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 2px 10px;
+    
+}
+
+.header-button:hover {
+    border-bottom: 2px solid black;
 }
 
 #main-content {
-    outline: 3px red solid;
+    background-color: rgb(220, 220, 223);
+    grid-row: 2 / 3;
+    overflow: auto;
+    max-height: calc(100% - 50px);
     margin-top: 25px;
-    padding: 25px 50px;
+    padding: 25px 50px 0 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 50px;
 }
 
-#main-content > button {
-    
+#new-book-button {
+    all: unset;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 15px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#new-book-button:hover {
+    background-color: rgba(144, 141, 141, 0.534);
 }
 
 #grid {
+    overflow: auto;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, 350px);
@@ -54,23 +81,37 @@ body {
 }
 
 #footer {
-    outline: 3px red solid;
-    position: fixed;
-    bottom: 0;
-    left: calc(50% - 100px);
+    background-color: rgb(71, 70, 70);
+    grid-row: 3 / 4;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
-#footer > img {
-    outline: purple solid 2px;
-    height: 25px;
-    width: 25px;
+a {
+    text-decoration: none;
 }
+
+#footer > a > p {
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#footer > a > ion-icon {
+    color: white;
+    font-size: 28px;
+}
+
 
 /* Dialog Form Styling */
+
+#new-book-dialog {
+    border: none;
+    border-radius: 15px;
+}
 
 #book-form {
     height: 350px;
@@ -80,9 +121,10 @@ body {
 }
 
 #book-form > h2 {
-    margin-top: 25px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 35px;
     text-align: center;
+    font-size: 28px;
 }
 
 #inputs-div {
@@ -92,20 +134,66 @@ body {
 }
 
 #inputs-div > input {
+    all: unset;
+    padding: 2.5px;
     height: 25px;
-    font-size: 16px;
+    font-size: 19px;
+    font-weight: 400;
+    border: 1px solid grey;
+    cursor: pointer;
 }
 
+input::placeholder {
+    font-size: 18px;
+    font-style: italic;
+}
+
+#checkbox > label,
+#read {
+    font-size: 17px;
+    cursor: pointer;
+}
+
+
+
 #Create-close-div {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     gap: 15px;
 }
 
 #Create-close-div > button {
+    all: unset;
     flex-grow: 1;
     height: 35px;
+    width: 110px;
+    cursor: pointer;
+    border: 1px grey solid;
+    border-radius: 5px;
+    text-align: center;
+    color: rgb(32, 30, 30);
+    font-weight: 500;
 }
+
+button#submit-book {
+    background-color: rgb(133, 211, 166);
+    transition: 0.25s;
+}
+
+button#close-book {
+    background-color: rgb(227, 142, 142);
+    transition: 0.25s;
+}
+
+button#submit-book:hover {
+    background-color: rgb(87, 213, 139);
+}
+
+button#close-book:hover {
+    background-color: rgb(226, 93, 93);
+}
+
 
 /* Book Cards Styling */
 
@@ -138,7 +226,7 @@ body {
     font-size: 14px;
 }
 
-#readButton {
+.readButton {
     position: absolute;
     top: 160px;
     left: calc(50% - 60px);
@@ -150,10 +238,18 @@ body {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    transition: 0.25s;
+}
+
+#read-button:hover {
+    background-color: rgb(87, 213, 139) !important;
+}
+
+#inprogress-button:hover {
+    background-color: rgb(84, 117, 226) !important;
 }
 
 .deleteIconDiv {
-    /*outline: black 2px solid;*/
     display: flex;
     align-items: center;
     justify-content: center;

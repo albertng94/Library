@@ -78,13 +78,15 @@ function changeReadStatus(e) {
 
     if (readButton.textContent === "Read") {
         readButton.textContent = "In progress...";
-        readButton.style.backgroundColor = "rgb(163, 163, 163)";
+        readButton.style.backgroundColor = "rgb(150, 170, 236)";
         myLibrary[bookCardId].read = "In progress...";
+        readButton.id = "inprogress-button";
 
     } else {
         readButton.textContent = "Read";
         readButton.style.backgroundColor = "rgb(133, 211, 166)";
         myLibrary[bookCardId].read = "Read";
+        readButton.id = "read-button";
     }
 
 }
@@ -145,8 +147,18 @@ let booksCount = 0;
 
 // Book Object Constructor - stores the basic information to be added from each book (Used by function "pushBookToArray").
 
-function book(title, bookAuthor, bookPages, bookRead) {
-    const author = `By ${bookAuthor}`;
+function book(bookTitle, bookAuthor, bookPages, bookRead) {
+
+    function capitalize (str) {
+        return str
+        .toLowerCase()
+        .split(" ")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    }
+
+    const title = `${capitalize(bookTitle)}`;
+    const author = `By ${capitalize(bookAuthor)}`;
     const pages = `${bookPages} pages`;
     const read = bookRead === true ? "Read" : "In progress...";
     const statsPages = Number(bookPages);
@@ -206,16 +218,18 @@ function createNewBookCard() {
     titleDiv.setAttribute("id", "titleDiv");
     authorDiv.setAttribute("id", "authorDiv");
     pagesDiv.setAttribute("id", "pagesDiv");
-    readButton.setAttribute("id", "readButton");
+    readButton.classList.add("readButton");
     readButton.setAttribute("onclick", "changeReadStatus(event)")
     deleteIconDiv.setAttribute("onclick", "executeBookDeletion(event)");
     deleteIconDiv.classList.add("deleteIconDiv");
 
     // Add a different background color to the readButton depending on its value
     if (bookCard.read === "Read") {
-        readButton.style.backgroundColor = "rgb(133, 211, 166)";            
+        readButton.style.backgroundColor = "rgb(133, 211, 166)";
+        readButton.setAttribute("id", "read-button");            
     } else {
-        readButton.style.backgroundColor = "rgb(163, 163, 163)";
+        readButton.style.backgroundColor = "rgb(150, 170, 236)";
+        readButton.setAttribute("id", "inprogress-button"); 
     }
 
     // Append divs/button as bookDiv childs

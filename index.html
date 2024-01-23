@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library by albertngdev</title>
+    <title>Library by albertng</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,10 @@
 </head>
 <body>
     <div id="header">
-        <h2>Library</h2>
+        <h2>MyLibrary</h2>
         <div>
-            <button id="stats">Stats</button>
-            <button>Log In</button>
+            <button class="header-button" id="stats">Stats</button>
+            <button class="header-button">Log in</button>
         </div>
     </div>
 
@@ -24,19 +24,19 @@
     </div>
 
     <div id="footer">
-        <p>Created by albertngdev</p>
-        <img src="" alt="">
+        <a href="https://github.com/albertng94" target="_blank"><p>Created by albertng</p></a>
+        <a href="https://github.com/albertng94" target="_blank"><ion-icon id="github" name="logo-github"></ion-icon></a>
     </div>
 
     <dialog id="new-book-dialog">
         <form id="book-form" method="dialog">
             <h2>New book</h2>
             <div id="inputs-div">
-                <input type="text" name="title" placeholder="Title" id="title" required>
-                <input type="text" name="author" placeholder="Author" id="author" required>
-                <input type="text" name="pages" placeholder="Number of pages" id="pages" required>
-                <div>
-                    <label for="read">Have you read it?</label>
+                <input type="text" name="title" placeholder="Title*" id="title" required>
+                <input type="text" name="author" placeholder="Author*" id="author" required>
+                <input type="text" name="pages" placeholder="Number of pages*" id="pages" required>
+                <div id="checkbox"> 
+                    <label for="read">Have you read it?*</label>
                     <input type="checkbox" name="read" id="read">
                 </div>
                 <div id="Create-close-div">
