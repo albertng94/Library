@@ -35,11 +35,18 @@ const closeNewBookDialog = (function() {
 const executeNewBookCreation = (function() {
 
     const submitBookButton = document.getElementById("submit-book");
+    const bookTitle = document.getElementById("title");
+    const bookAuthor = document.getElementById("author");
+    const bookPages = document.getElementById("pages");
 
     submitBookButton.addEventListener("click", () => {
-        // "createNewBookCard" executes "pushNewBookArray" (pushes the current book into "myLibrary" array) and creates the book card in the DOM.
-        createNewBookCard();
-        booksCount++;
+        if ((bookTitle.value == false) || (bookAuthor.value == false) || (bookPages.value == false)) {
+            alert("All camps with the * symbol must be filled to create the book.");
+        } else {
+            // "createNewBookCard" executes "pushNewBookArray" (pushes the current book into "myLibrary" array) and creates the book card in the DOM.
+            createNewBookCard();
+            booksCount++;
+        }
     });
 
 })();
