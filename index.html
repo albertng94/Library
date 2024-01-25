@@ -34,7 +34,7 @@
             <div id="inputs-div">
                 <input type="text" name="title" placeholder="Title*" id="title" required>
                 <input type="text" name="author" placeholder="Author*" id="author" required>
-                <input type="text" name="pages" placeholder="Number of pages*" id="pages" required>
+                <input type="text" name="pages" placeholder="Number of pages*" id="pages" pattern="^\d+$" required>
                 <div id="checkbox"> 
                     <label for="read">Have you read it?</label>
                     <input type="checkbox" name="read" id="read">
@@ -49,9 +49,11 @@
 
     <dialog id="delete-book-dialog">
         <div id="delete-book-div">
-            <p>Are you sure you want to delete this book?</p>
-            <button id="delete-book-yes">Yes</button>
-            <button id="delete-book-no">No</button>
+            <p>Do you want to delete this book?</p>
+            <div id="delete-book-buttons">
+                <button id="delete-book-yes">Yes</button>
+                <button id="delete-book-no">No</button>
+            </div>
         </div>
     </dialog>
 
@@ -63,19 +65,19 @@
             </div>
             <div id="stats-header">Your Library Stats</div>
             <div class="stat-div" id="stat-div-first">
-                <div class="stat-presentation" id="total-books"></div>
+                <div id="total-books"></div>
                 <div class="stat" id="totalBooks"></div>
             </div>
             <div class="stat-div">
-                <div class="stat-presentation" id="books-read"></div>
+                <div id="books-read"></div>
                 <div class="stat" id="totalRead"></div>
             </div>
             <div class="stat-div">
-                <div class="stat-presentation" id="books-in-progress"></div>
+                <div id="books-in-progress"></div>
                 <div class="stat" id="totalInProgress"></div>
             </div>
             <div class="stat-div" id="stat-div-last">
-                <div class="stat-presentation" id="pages-read"></div>
+                <div id="pages-read"></div>
                 <div class="stat" id="totalPages"></div>
             </div>
             <button id="close-stats">Close</button>

@@ -40,7 +40,10 @@ const executeNewBookCreation = (function() {
     const bookPages = document.getElementById("pages");
 
     submitBookButton.addEventListener("click", () => {
-        if ((bookTitle.value == false) || (bookAuthor.value == false) || (bookPages.value == false)) {
+        if ((bookPages.value) && (bookPages.checkValidity() === false)) {
+            alert("The pages camp requires an integer number");
+            bookPages.value = "";
+        } else if ((bookTitle.value == false) || (bookAuthor.value == false) || (bookPages.value == false)) {
             alert("All camps with the * symbol must be filled to create the book.");
         } else {
             // "createNewBookCard" executes "pushNewBookArray" (pushes the current book into "myLibrary" array) and creates the book card in the DOM.
@@ -91,7 +94,7 @@ function changeReadStatus(e) {
 
     } else {
         readButton.textContent = "Read";
-        readButton.style.backgroundColor = "rgb(133, 211, 166)";
+        readButton.style.backgroundColor = "rgb(146, 209, 172)";
         myLibrary[bookCardId].read = "Read";
         readButton.id = "read-button";
     }
@@ -232,7 +235,7 @@ function createNewBookCard() {
 
     // Add a different background color to the readButton depending on its value
     if (bookCard.read === "Read") {
-        readButton.style.backgroundColor = "rgb(133, 211, 166)";
+        readButton.style.backgroundColor = "rgb(146, 209, 172)";
         readButton.setAttribute("id", "read-button");            
     } else {
         readButton.style.backgroundColor = "rgb(150, 170, 236)";
@@ -322,14 +325,19 @@ function updateStats() {
     } else {
         noStatsDiv1.textContent = "";
         noStatsDiv2.textContent = "";
-        totalBooksPresentation.textContent = "Total Books:";
+        totalBooksPresentation.textContent = "Total Books";
         totalBooksDiv.textContent = `${booksCount}`;
-        totalReadPresentation.textContent = "Books Read:";
+        totalReadPresentation.textContent = "Books Read";
         totalReadDiv.textContent = `${totalBooksRead}`;
-        totalInProgressPresentation.textContent = "Books In Progress:";
+        totalInProgressPresentation.textContent = "Books In Progress";
         totalInProgressDiv.textContent = `${totalBooksInProgress}`;
-        totalPagesPresentation.textContent = "Pages Read:";
+        totalPagesPresentation.textContent = "Pages Read";
         totalPagesDiv.textContent = `${totalPages}`;
+
+        totalBooksPresentation.classList.add("stat-presentation");
+        totalReadPresentation.classList.add("stat-presentation");
+        totalInProgressPresentation.classList.add("stat-presentation");
+        totalPagesPresentation.classList.add("stat-presentation");
     }
 
 }

@@ -143,6 +143,14 @@ a {
     cursor: pointer;
 }
 
+#inputs-div > input:user-invalid {
+    border: 2px solid rgb(189, 64, 64);
+}
+
+#inputs-div > input:valid {
+    border: 2px solid rgb(87, 213, 139);
+}
+
 input::placeholder {
     font-size: 18px;
     font-style: italic;
@@ -153,8 +161,6 @@ input::placeholder {
     font-size: 17px;
     cursor: pointer;
 }
-
-
 
 #Create-close-div {
     margin-top: 10px;
@@ -177,12 +183,12 @@ input::placeholder {
 }
 
 button#submit-book {
-    background-color: rgb(133, 211, 166);
+    background-color: rgb(146, 209, 172);
     transition: 0.25s;
 }
 
 button#close-book {
-    background-color: rgb(227, 142, 142);
+    background-color: rgb(220, 219, 219);
     transition: 0.25s;
 }
 
@@ -191,7 +197,7 @@ button#submit-book:hover {
 }
 
 button#close-book:hover {
-    background-color: rgb(226, 93, 93);
+    background-color: rgb(178, 177, 177);
 }
 
 
@@ -270,6 +276,11 @@ ion-icon {
 
 /* Stats Dialog Styling */
 
+#stats-dialog {
+    border: none;
+    border-radius: 15px;
+}
+
 #stats-div {
     position: relative;
     height: 500px;
@@ -284,7 +295,7 @@ ion-icon {
     position: absolute;
     width: 300px;
     left: calc(50% - 150px);
-    top: 40%;
+    top: 42%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -306,20 +317,34 @@ ion-icon {
     width: 250px;
     left: calc(50% - 125px);
     text-align: center;
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 #close-stats {
+    all: unset;
     position: absolute;
-    width: 80px;
-    height: 25px;
-    left: calc(50% - 40px);
+    left: calc(50% - 55px);
     top: 90%;
+    width: 110px;
+    height: 35px;
+    cursor: pointer;
+    border: 1px grey solid;
+    border-radius: 5px;
+    text-align: center;
+    color: rgb(32, 30, 30);
+    font-weight: 500;
+    background-color: rgb(220, 219, 219);
+    transition: 0.25s;
+}
+
+#close-stats:hover {
+    background-color: rgb(178, 177, 177);
 }
 
 #stat-div-first {
-    margin-top: 80px;
+    margin-top: 96px;
 }
 
 #stat-div-last {
@@ -347,8 +372,55 @@ ion-icon {
 }
 
 .stat {
-    color: rgb(250, 55, 55);
+    color: rgb(71, 70, 70);
     font-size: 25px;
-    font-weight: 300;
+    font-weight: 600;
     font-style: italic;
+}
+
+
+/* Delete-book Dialog Styling */
+
+#delete-book-dialog {
+    border: none;
+    border-radius: 15px;
+}
+
+#delete-book-div {
+    height: 215px;
+    width: 300px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#delete-book-div > p {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+#delete-book-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+#delete-book-buttons > button {
+    all: unset;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px grey solid;
+    border-radius: 5px;
+    text-align: center;
+    color: rgb(32, 30, 30);
+    font-weight: 500;
+    background-color: rgb(220, 219, 219);
+    transition: 0.25s;
+}
+
+#delete-book-buttons > button:hover {
+    background-color: rgb(178, 177, 177);
 }
