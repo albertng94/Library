@@ -56,6 +56,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 50px;
+    box-shadow: inset 0px 5px 5px rgb(129, 129, 129);
 }
 
 #new-book-button {
@@ -69,6 +70,7 @@ body {
 
 #new-book-button:hover {
     background-color: rgba(144, 141, 141, 0.534);
+    box-shadow: 2px 2px 2px rgb(129, 129, 129);
 }
 
 #grid {
@@ -111,6 +113,7 @@ a {
 #new-book-dialog {
     border: none;
     border-radius: 15px;
+    box-shadow: 2px 2px 2px rgb(129, 129, 129);
 }
 
 #book-form {
@@ -125,6 +128,7 @@ a {
     margin-bottom: 35px;
     text-align: center;
     font-size: 28px;
+    
 }
 
 #inputs-div {
@@ -141,6 +145,7 @@ a {
     font-weight: 400;
     border: 1px solid grey;
     cursor: pointer;
+    box-shadow: 0.5px 0.5px 0.5px rgb(129, 129, 129);
 }
 
 #inputs-div > input:user-invalid {
@@ -180,6 +185,7 @@ input::placeholder {
     text-align: center;
     color: rgb(32, 30, 30);
     font-weight: 500;
+    box-shadow: 1px 1px 1px rgb(129, 129, 129);
 }
 
 button#submit-book {
@@ -213,6 +219,7 @@ button#close-book:hover {
     flex-direction: column;
     padding: 25px 25px;
     gap: 5px;
+    box-shadow: 2px 0px 2px rgb(129, 129, 129);
 }
 
 #titleDiv {
@@ -245,6 +252,7 @@ button#close-book:hover {
     font-weight: 600;
     cursor: pointer;
     transition: 0.25s;
+    box-shadow: 1px 1px 1px rgb(129, 129, 129);
 }
 
 #read-button:hover {
@@ -272,6 +280,12 @@ ion-icon {
     color:  rgb(180, 13, 13);
     --ionicon-stroke-width: 35px;
     cursor: pointer;
+    transition: 0.25s;
+}
+
+ion-icon:hover {
+    font-size: 30px;
+    color:  rgb(147, 3, 3);
 }
 
 /* Stats Dialog Styling */
@@ -279,6 +293,7 @@ ion-icon {
 #stats-dialog {
     border: none;
     border-radius: 15px;
+    box-shadow: 2px 2px 2px rgb(129, 129, 129);
 }
 
 #stats-div {
@@ -337,6 +352,7 @@ ion-icon {
     font-weight: 500;
     background-color: rgb(220, 219, 219);
     transition: 0.25s;
+    box-shadow: 1px 1px 1px rgb(129, 129, 129);
 }
 
 #close-stats:hover {
@@ -384,6 +400,7 @@ ion-icon {
 #delete-book-dialog {
     border: none;
     border-radius: 15px;
+    box-shadow: 2px 2px 2px rgb(129, 129, 129);
 }
 
 #delete-book-div {
@@ -419,6 +436,7 @@ ion-icon {
     font-weight: 500;
     background-color: rgb(220, 219, 219);
     transition: 0.25s;
+    box-shadow: 1px 1px 1px rgb(129, 129, 129);
 }
 
 #delete-book-buttons > button:hover {
